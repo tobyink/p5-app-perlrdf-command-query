@@ -148,7 +148,7 @@ sub _model
 sub _outputs
 {
 	require App::perlrdf::FileSpec::OutputRDF;
-	require App::perlrdf::FileSpec::OutputFile;
+	require App::perlrdf::FileSpec::OutputBindings;
 	
 	my ($self, $opt, $arg, $class) = @_;
 	
@@ -174,7 +174,8 @@ sub _process_sparql
 	my ($self, $opt, $arg, $sparql, $model) = @_;
 	
 	my $qclass = ref $model ? 'RDF::Query' : 'RDF::Query::Client';
-	my $query  = $qclass->new($sparql);
+	my $query  = $qclass->new($sparql)
+		or die RDF::Query->error;
 	my $result = $query->execute($model);
 	
 	if ($result->is_graph)
@@ -202,26 +203,13 @@ sub _process_sparql
 		my (@outputs) = $self->_outputs(
 			$opt,
 			$arg,
-			'App::perlrdf::FileSpec::OutputRDF',
+			'App::perlrdf::FileSpec::OutputBindings',
 		);
 		
 		foreach my $out (@outputs)
 		{
-			if ($out->format =~ /json/i)
-			{
-				$out->handle->print($mat->as_json);
-			}
-			elsif ($out->format =~ /xml/i)
-			{
-				$mat->print_xml($out->handle);
-			}
-			else
-			{
-				$out->handle->print($mat->as_string);
-			}
-			
+			$out->serialize_iterator($mat);
 			$mat->reset;
-			$out->handle->close;
 		}
 	}
 }
