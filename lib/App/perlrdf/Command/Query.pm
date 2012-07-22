@@ -256,7 +256,9 @@ L<http://rt.cpan.org/Dist/Display.html?Queue=App-perlrdf-Command-Query>.
 
 =head1 SEE ALSO
 
-L<App::perlrdf>.
+L<App::perlrdf>, L<RDF::Query>, L<RDF::Query::Client>, L<Spreadsheet::Wright>.
+
+The L<rqsh> tool that comes with RDF::Query.
 
 =head1 AUTHOR
 
