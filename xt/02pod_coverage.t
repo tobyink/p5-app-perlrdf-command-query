@@ -1,4 +1,4 @@
-use Test::More;
+use Test::More skip_all => "not appropriate";
 use Test::Pod::Coverage;
 
 my @modules = qw(App::perlrdf::Command::Query);
