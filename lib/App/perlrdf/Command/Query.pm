@@ -174,9 +174,29 @@ sub _process_sparql
 	my ($self, $opt, $arg, $sparql, $model) = @_;
 	
 	my $qclass = ref $model ? 'RDF::Query' : 'RDF::Query::Client';
-	my $query  = $qclass->new($sparql)
-		or die RDF::Query->error;
-	my $result = $query->execute($model);
+	my @params = ref $model ? () : ({
+		QueryMethod => ($ENV{PERLRDF_QUERY_METHOD} // undef),
+	});
+	my $query  = $qclass->new($sparql) or die RDF::Query->error;
+	if ($query->can('useragent')) {
+		$query->useragent->max_redirect(5);
+		$query->useragent->agent(
+			sprintf(
+				'%s/%s (%s) %s',
+				ref($self),
+				$self->VERSION,
+				$self->AUTHORITY,
+				$query->useragent->agent,
+			),
+		);
+	}
+	my $result = $query->execute($model, @params) or do { 
+		if (($ENV{PERLRDF_QUERY_DEBUG}//'') and $query->can('http_response')) {
+			warn $query->http_response->request->as_string;
+			warn $query->http_response->as_string;
+		}
+		die $query->error;
+	};
 	
 	if ($result->is_graph)
 	{
@@ -253,6 +273,10 @@ This module adds query abilities to the C<perlrdf> command-line client.
 
 Please report any bugs to
 L<http://rt.cpan.org/Dist/Display.html?Queue=App-perlrdf-Command-Query>.
+
+=head1 ENVIRONMENT
+
+Set C<PERLRDF_QUERY_METHOD> to "GET" or "POST" specify a query method.
 
 =head1 SEE ALSO
 
