@@ -175,7 +175,7 @@ sub _process_sparql
 	
 	my $qclass = ref $model ? 'RDF::Query' : 'RDF::Query::Client';
 	my @params = ref $model ? () : ({
-		QueryMethod => ($ENV{PERLRDF_QUERY_METHOD} // undef),
+		QueryMethod => ($ENV{PERLRDF_QUERY_METHOD} // "POST"),
 	});
 	my $query  = $qclass->new($sparql) or die RDF::Query->error;
 	if ($query->can('useragent')) {
