@@ -8,7 +8,7 @@ use utf8;
 
 BEGIN {
 	$App::perlrdf::FileSpec::OutputBindings::AUTHORITY = 'cpan:TOBYINK';
-	$App::perlrdf::FileSpec::OutputBindings::VERSION   = '0.001';
+	$App::perlrdf::FileSpec::OutputBindings::VERSION   = '0.002';
 }
 
 use Any::Moose;

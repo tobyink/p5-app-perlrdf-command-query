@@ -4,3 +4,10 @@
 	issued  2012-07-19;
 	label   "Initial release: happy pi day!".
 
+`App-perlrdf-Command-Query 0.002 cpan:TOBYINK`
+	issued  2013-07-16;
+	changeset [
+		item "Support --query_method option, and PERL_QUERY_METHOD environment variable."^^Addition;
+		item "Improved error messages."^^Change;
+	].
+

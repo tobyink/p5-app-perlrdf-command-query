@@ -7,7 +7,7 @@ use utf8;
 
 BEGIN {
 	$App::perlrdf::Command::RDQL::AUTHORITY = 'cpan:TOBYINK';
-	$App::perlrdf::Command::RDQL::VERSION   = '0.001';
+	$App::perlrdf::Command::RDQL::VERSION   = '0.002';
 }
 
 use base 'App::perlrdf::Command::Query';
