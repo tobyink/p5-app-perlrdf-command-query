@@ -11,3 +11,10 @@
 		item "Improved error messages."^^Change;
 	].
 
+
+`App-perlrdf-Command-Query 0.003 cpan:TOBYINK`
+	issued    2014-09-14;
+	changeset [
+		item "Switch to Dist::Inkt."^^Packaging;
+	].
+
