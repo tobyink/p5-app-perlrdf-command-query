@@ -1,0 +1,11 @@
+@prefix deps:  <http://ontologi.es/doap-deps#> .
+
+<http://purl.org/NET/cpan-uri/dist/App-perlrdf-Command-Query/project>
+	deps:runtime-requirement         [ deps:on "YAML::XS"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "App::perlrdf"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "JSON 2.00"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "RDF::Query 2.900"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "RDF::Query::Client 0.112"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "Spreadsheet::Wright"^^deps:CpanId ];
+	deps:test-requirement            [ deps:on "Test::More 0.61"^^deps:CpanId ].
+
